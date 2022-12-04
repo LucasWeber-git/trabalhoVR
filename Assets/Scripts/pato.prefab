@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4383089639165491277}
   m_Layer: 0
   m_Name: pato
-  m_TagString: Untagged
+  m_TagString: Duck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,4 +114,4 @@ MonoBehaviour:
   b: 21
   c: -21
   d: 21
-  speed: 0.5
+  speed: 0.1

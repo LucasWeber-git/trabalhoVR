@@ -10,7 +10,7 @@ public class pato : MonoBehaviour
     public float speed;
     void Start()
     {
-        Destroy(this.gameObject,7);
+        Destroy(this.gameObject, 15);
         x = Random.Range(a, b);
         z = Random.Range(c, d);
         teste.Set(x, 30, z);

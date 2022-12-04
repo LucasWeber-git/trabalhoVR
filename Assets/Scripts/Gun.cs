@@ -6,17 +6,12 @@ public class Gun : MonoBehaviour
 {
     private Vector2 turn;
     public float speed = 1f;
-    public int rotation = 5;
-
-    // Start is called before the first frame update
+    public float rotation = 1f;
 
     [SerializeField] private Spawner bulletSpawner;
-    [SerializeField] private Spawner emptyShellSpawner;
     [SerializeField] private GameObject muzzleFlashPrefab;
 
     [SerializeField] float firePower = 1000f;
-
-    private const float EMPTY_SHELL_FORCE = 10f;
 
     private AudioSource audioSource;
 
@@ -35,7 +30,6 @@ public class Gun : MonoBehaviour
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            Debug.Log(turn.y);
             turn.y = turn.y <= -90 ? -90 : turn.y -= rotation;
             transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
         }
@@ -62,9 +56,6 @@ public class Gun : MonoBehaviour
     {
         GameObject bullet = bulletSpawner.Spawn();
         bullet.GetComponent<Rigidbody>().AddForce(transform.forward * firePower);
-
-        GameObject emptyShell = emptyShellSpawner.Spawn();
-        emptyShell.GetComponent<Rigidbody>().AddForce(transform.right * EMPTY_SHELL_FORCE);
 
         GameObject muzzleFlash = Instantiate(muzzleFlashPrefab, bulletSpawner.transform.position, bulletSpawner.transform.rotation);
         muzzleFlash.transform.Rotate(new Vector3(0, 180, 0));
