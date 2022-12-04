@@ -1,27 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
-{
-    private Vector2 turn;
-    public float speed = 1f;
-    public float rotation = 1f;
+{    
 
     [SerializeField] private Spawner bulletSpawner;
     [SerializeField] private GameObject muzzleFlashPrefab;
 
     [SerializeField] float firePower = 1000f;
+    [SerializeField] int maxAmmo = 10;
+    [SerializeField] float rotation = 1f;
 
+    private TextMeshProUGUI ammoTextMesh;
     private AudioSource audioSource;
+    private int currentAmmo;
+    private Vector2 turn;
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();        
+        audioSource = GetComponent<AudioSource>();
+        ammoTextMesh = GameObject.FindGameObjectWithTag("Ammo").GetComponent<TextMeshProUGUI>();
+        currentAmmo = maxAmmo;
     }
 
     void Update()
     {
+        ammoTextMesh.text = currentAmmo + " / " + maxAmmo;
+
         if (Input.GetKey(KeyCode.UpArrow))
         {
             turn.y = turn.y >= 90 ? 90 : turn.y += rotation;
@@ -46,9 +53,14 @@ public class Gun : MonoBehaviour
             transform.localRotation = Quaternion.Euler(-turn.y, turn.x, 0);
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && currentAmmo > 0)
         {
             Fire();
+        }
+
+        if (Input.GetButtonDown("Reload"))
+        {
+            currentAmmo = maxAmmo;
         }
     }
 
@@ -61,5 +73,8 @@ public class Gun : MonoBehaviour
         muzzleFlash.transform.Rotate(new Vector3(0, 180, 0));
 
         audioSource.Play();
+
+        currentAmmo--;
     }
+
 }

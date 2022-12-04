@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Duck
   - Score
+  - Ammo
   layers:
   - Default
   - TransparentFX
