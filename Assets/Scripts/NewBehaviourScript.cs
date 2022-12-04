@@ -8,8 +8,6 @@ public class NewBehaviourScript : MonoBehaviour
 
     public GameObject pato;
 
-    public float speed;
-
     float timer;
     public float setTimer;
 
